@@ -9,6 +9,20 @@ import Checkout from './pages/Checkout.jsx'
 function App() {
 	let [products, setProducts] = useState([])
 
+	const updateProduct = (id, quantity) => {
+		let newProducts = products.map(product => {
+			if (product.id === id) {
+				return {
+					...product,
+					quantity
+				}
+			} else {
+				return {...product}
+			}
+		})
+		setProducts(newProducts)
+	}
+
 	const fetchProducts = async (quantity = null) => {
 		try {
 			let url = 'https://fakestoreapi.com/products'
@@ -37,11 +51,17 @@ function App() {
 
 	return (
 	<>
-    	<Navbar />
+    	<Navbar products={products} />
 
 		<Routes>
 			<Route path="/" element={<Home products={products} setProducts={setProducts} fetchProducts={fetchProducts} />} />
-			<Route path="/shop" element={<Shop />} />
+			<Route 
+				path="/shop" 
+				element={<Shop products={products} 
+				setProducts={setProducts} 
+				updateProduct={updateProduct} 
+				fetchProducts={fetchProducts}/>} 
+			/>
 			<Route path="/checkout" element={<Checkout />} />
 		</Routes>
 

@@ -1,7 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-function Navbar(props) {
+function Navbar({products}) {
     let navigate = useNavigate()
+    let totalNumberOfProducts = products.reduce(
+        (acc, cur) =>  acc + cur.quantity,
+        0,
+    )
+    let quantitySpan = (totalNumberOfProducts > 0) 
+        ? <span data-testid='cart-counter'>{totalNumberOfProducts}</span>
+        : null;
 
     const handleButtonClick = () => navigate('checkout')
 
@@ -10,9 +17,11 @@ function Navbar(props) {
         <h1>Shopy</h1>
         <Link to="/">home</Link>
         <Link to="/shop">shop</Link>
-        <button type="button" onClick={handleButtonClick}>cart</button>
+        <button type="button" onClick={handleButtonClick}>
+            {quantitySpan}
+            cart
+        </button>
         <button type="button" onClick={handleButtonClick}>checkout</button>
-        <span>{props.quantity}</span>
     </header>
     )
 }
