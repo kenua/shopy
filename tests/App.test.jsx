@@ -173,7 +173,7 @@ describe('Checkout page', () => {
         expect(screen.getByRole('heading', {name: /^checkout$/i}))
     })
 
-    test('checkout button renders checkout page', async () => {
+    test('\'Checkout\' button renders checkout page', async () => {
         const user = userEvent.setup()
     
         render(<App />, { wrapper: Router })

@@ -62,7 +62,7 @@ function App() {
 				updateProduct={updateProduct} 
 				fetchProducts={fetchProducts}/>} 
 			/>
-			<Route path="/checkout" element={<Checkout />} />
+			<Route path="/checkout" element={<Checkout products={products} updateProduct={updateProduct} />} />
 		</Routes>
 
 		<Footer />
