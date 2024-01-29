@@ -23,38 +23,12 @@ function App() {
 		setProducts(newProducts)
 	}
 
-	const fetchProducts = async (quantity = null) => {
-		try {
-			let url = 'https://fakestoreapi.com/products'
-	
-			if (typeof quantity === 'number' && quantity > 0) {
-				url = `https://fakestoreapi.com/products?limit=${quantity}`
-			}
-	
-			let res = await fetch(url)
-			let data = await res.json()
-			let productsData = data.map(product => ({
-				id: product.id,
-				title: product.title,
-				price: product.price,
-				description: product.description,
-				url: product.image,
-				quantity: 0,
-			}))
-
-			return productsData
-
-		} catch (e) {
-			throw new Error('Sorry, we\'re unable to display any products at the moment. Please refresh the page or try again later.')
-		}
-	}
-
 	return (
 	<>
     	<Navbar products={products} />
 
 		<Routes>
-			<Route path="/" element={<Home products={products} setProducts={setProducts} fetchProducts={fetchProducts} />} />
+			<Route path="/" element={<Home products={products} setProducts={setProducts} updateProduct={updateProduct} />} />
 			<Route 
 				path="/shop" 
 				element={<Shop products={products} 

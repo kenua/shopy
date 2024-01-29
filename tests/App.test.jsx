@@ -22,13 +22,53 @@ describe('App component', () => {
 
 describe('Home component', () => {
     test('Home renders', async () => {
-        fetch.mockResolvedValue({ json: () => Promise.resolve([]) })
+        let fakeProducts = [
+            {
+                id: 1,
+                title: `product 1`,
+                price: 10.99,
+                description: `This product sold 12.`,
+                url: '...',
+                quantity: 0,
+            },
+            {
+                id: 2,
+                title: `product 2`,
+                price: 10.99,
+                description: `This product sold 12.`,
+                url: '...',
+                quantity: 0,
+            },
+            {
+                id: 3,
+                title: `product 3`,
+                price: 10.99,
+                description: `This product sold 12.`,
+                url: '...',
+                quantity: 0,
+            },
+            {
+                id: 4,
+                title: `product 4`,
+                price: 10.99,
+                description: `This product sold 12.`,
+                url: '...',
+                quantity: 0,
+            },
+        ]
+
+        fetch.mockResolvedValue({ json: () => Promise.resolve(fakeProducts) })
 
         await act(async () => render(<App />, { wrapper: Router }))
         
         const homeHeading = screen.getByRole('heading', {name: /shop to your heart's content/i})
     
         expect(homeHeading).toBeInTheDocument()
+        expect(screen.getAllByRole('article').length).toBe(4)
+        expect(screen.getByRole('heading', {name: 'product 1'})).toBeInTheDocument()
+        expect(screen.getAllByText('$10.99')[0]).toBeInTheDocument()
+        expect(screen.getAllByText('This product sold 12.')[0]).toBeInTheDocument()
+        expect(screen.getAllByDisplayValue('0')[0]).toBeInTheDocument()
     })
 
     test('Four products render', async () => {
