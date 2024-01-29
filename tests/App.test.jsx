@@ -195,6 +195,13 @@ describe('Shop page', () => {
         expect(screen.queryByTestId('cart-counter')).toBeNull()
         expect(screen.getByDisplayValue('0')).toBeInTheDocument()
         expect(button.textContent).toMatch(/add to cart/i)
+
+        // quantity can't get below 0 or decimals
+        await user.click(minusButton)
+        fireEvent.change(quantityInput, {target: {value: -1}})
+        expect(quantityInput.value).not.toBe('-1')
+        fireEvent.change(quantityInput, {target: {value: 1.5}})
+        expect(quantityInput.value).toBe('2')
     })
 })
 

@@ -11,10 +11,10 @@ function App() {
 
 	const updateProduct = (id, quantity) => {
 		let newProducts = products.map(product => {
-			if (product.id === id) {
+			if (product.id === id && quantity >= 0) {
 				return {
 					...product,
-					quantity
+					quantity: Math.round(quantity)
 				}
 			} else {
 				return {...product}
