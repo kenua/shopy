@@ -1,6 +1,6 @@
-import { describe, test, expect } from 'vitest'
-import { render, screen, act, fireEvent } from '@testing-library/react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { describe, test, expect, vi } from 'vitest'
+import { render, screen, act, fireEvent, waitFor, findByText } from '@testing-library/react'
+import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom'
 import { userEvent } from '@testing-library/user-event'
 
 import App from '../src/App.jsx'
@@ -48,115 +48,113 @@ describe('Home component', () => {
 })
 
 describe('Shop page', () => {
-    test('Shop link renders shop page', async () => {
-        const user = userEvent.setup()
-    
-        await act(async () => render(<App />, { wrapper: Router }))
-    
-        const shopLink = screen.getByText(/^shop$/i)
-    
-        await user.click(shopLink)
-    
-        expect(screen.getByRole('heading', {name: /^shop$/i}))
-    })
-
-    test('Products render', async () => {
-        let fakeProducts = [
-            {
-                id: 1,
-                title: `product 1`,
-                price: 10.99,
-                description: `This product sold 12.`,
-                url: '...',
-                quantity: 0,
-            },
-            {
-                id: 2,
-                title: `product 2`,
-                price: 23.99,
-                description: `This product sold 11.`,
-                url: '...',
-                quantity: 0,
-            },
-        ]
+    test('Shop component and product items render', async () => {
+        let fakeProducts = [{
+            id: 1,
+            title: `product 1`,
+            price: 10.99,
+            description: `This product sold 12.`,
+            url: '...',
+            quantity: 0,
+        }]
     
         fetch.mockResolvedValue({ json: () => Promise.resolve(fakeProducts) })
 
-        await act(async () => render(<App />, { wrapper: Router }))
+        await act(async () => render(
+            <MemoryRouter initialEntries={['/shop']}>
+                <App />
+            </MemoryRouter>
+        ))
 
-        let products = await screen.findAllByRole('article')
-
+        expect(await screen.findByRole('article')).toBeInTheDocument()
         expect(screen.getByRole('heading', {name: 'product 1'})).toBeInTheDocument()
         expect(screen.getByText('$10.99')).toBeInTheDocument()
         expect(screen.getByText('This product sold 12.')).toBeInTheDocument()
-        expect(screen.getAllByDisplayValue('0')[0]).toBeInTheDocument()
+        expect(screen.getByDisplayValue('0')).toBeInTheDocument()
     })
 
-    test('\'Add To Cart\' button adds a single prodcut to cart', async () => {
+    test('Error mesage renders', async () => {
+        fetch.mockResolvedValue({ 
+            json: () => Promise.reject('Sorry, we\'re unable to display any products at the moment. Please refresh the page or try again later.') 
+        })
+
+        render(
+            <MemoryRouter initialEntries={['/shop']}>
+                <App />
+            </MemoryRouter>
+        )
+        
+        expect(await screen.findByText('Sorry, we\'re unable to display any products at the moment. Please refresh the page or try again later.'))
+    })
+
+    test('Product item buttons add or remove an item from cart', async () => {
         const user = userEvent.setup()
+        let fakeProducts = [{
+            id: 1,
+            title: `product 1`,
+            price: 10.99,
+            description: `This product sold 12.`,
+            url: '...',
+            quantity: 0,
+        }]
+    
+        fetch.mockResolvedValue({ json: () => Promise.resolve(fakeProducts) })
 
-        await act(async () => render(<App />, { wrapper: Router }))
-
-        let button = (await screen.findAllByRole('button', {name: /add to cart/i}))[0]
-
+        render(
+            <MemoryRouter initialEntries={['/shop']}>
+                <App />
+            </MemoryRouter>
+        )
+            
+        let button = await screen.findByRole('button', {name: /add to cart/i})
+        let plusButton = await screen.findByRole('button', {name:/\+/})
+        let minusButton = await screen.findByRole('button', {name:/\-/})
+        let quantityInput = await screen.findByRole('spinbutton')
+        
+        // Add a single item to cart
         await user.click(button)
-
-        expect(screen.getByTestId('cart-counter')).toHaveTextContent('1')
-        expect(screen.getByDisplayValue('1')).toBeInTheDocument()
         expect(button.textContent).toBe('Remove')
-    })
+        expect(screen.getByDisplayValue('1')).toBeInTheDocument()
+        expect(screen.getByTestId('cart-counter')).toHaveTextContent('1')
 
-    test('\'Remove From Cart\' button removes a product from cart', async () => {
-        const user = userEvent.setup()
-
-        await act(async () => render(<App />, { wrapper: Router }))
-
-        let button = (await screen.findAllByRole('button', {name: /add to cart/i}))[0]
-
-        await user.click(button) // add product
-        await user.click(button) // remove product
-
-        expect(screen.queryByTestId('cart-counter')).toBeNull()
-        expect(screen.getAllByRole('button', {name: /add to cart/i}).length).toBe(2)
-    })
-
-    test('\'Remove From Cart\' button removes all items from cart', async () => {
-        const user = userEvent.setup()
-
-        await act(async () => render(<App />, { wrapper: Router }))
-
-        let input = (await screen.findAllByRole('spinbutton'))[0]
-
-        fireEvent.change(input, {target: {value: 5}})
-
-        expect(input.value).toBe('5')
-        expect(screen.queryByTestId('cart-counter').textContent).toBe('5')
-
-        let button = await screen.findByRole('button', {name: /remove/i})
-
+        // Remove an item using 'Remove' button
         await user.click(button)
-
-        expect(input.value).toBe('0')
         expect(screen.queryByTestId('cart-counter')).toBeNull()
-    })
+        expect(screen.getByDisplayValue('0')).toBeInTheDocument()
+        expect(button.textContent).toMatch(/add to cart/i)
 
-    test('+ and - buttons increment & decrement product\'s quantity by 1', async () => {
-        const user = userEvent.setup()
-
-        await act(async () => render(<App />, { wrapper: Router }))
-
-        let plusButton = (await screen.findAllByRole('button', {name:/\+/}))[0]
-        let minusButton = (await screen.findAllByRole('button', {name:/\-/}))[0]
-
+        // Add multiple items using + button
         await user.click(plusButton)
         await user.click(plusButton)
+        await user.click(plusButton)
+        expect(screen.getByTestId('cart-counter')).toHaveTextContent('3')
+        expect(screen.getByDisplayValue('3')).toBeInTheDocument()
+        expect(button.textContent).toBe('Remove')
 
-        expect(screen.queryByTestId('cart-counter').textContent).toBe('2')        
-
+        // Remove multiple items using - button
         await user.click(minusButton)
         await user.click(minusButton)
-
+        await user.click(minusButton)
         expect(screen.queryByTestId('cart-counter')).toBeNull()
+        expect(screen.getByDisplayValue('0')).toBeInTheDocument()
+        expect(button.textContent).toMatch(/add to cart/i)
+
+        // Add multiple items using quantity input
+        fireEvent.change(quantityInput, {target: {value: 5}})
+        expect(quantityInput.value).toBe('5')
+        expect(screen.getByTestId('cart-counter')).toHaveTextContent('5')
+        expect(button.textContent).toBe('Remove')
+
+        // Remove multiple items using quantity inpute
+        fireEvent.change(quantityInput, {target: {value: 2}})
+        expect(quantityInput.value).toBe('2')
+        expect(screen.getByTestId('cart-counter')).toHaveTextContent('2')
+
+        // Remove all items using 'Remove' button
+        await user.click(button)
+        expect(screen.queryByTestId('cart-counter')).toBeNull()
+        expect(screen.getByDisplayValue('0')).toBeInTheDocument()
+        expect(button.textContent).toMatch(/add to cart/i)
     })
 })
 

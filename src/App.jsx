@@ -45,7 +45,7 @@ function App() {
 			return productsData
 
 		} catch (e) {
-			throw new Error('Something wrong happened while fetching :(')
+			throw new Error('Sorry, we\'re unable to display any products at the moment. Please refresh the page or try again later.')
 		}
 	}
 
@@ -59,8 +59,7 @@ function App() {
 				path="/shop" 
 				element={<Shop products={products} 
 				setProducts={setProducts} 
-				updateProduct={updateProduct} 
-				fetchProducts={fetchProducts}/>} 
+				updateProduct={updateProduct} />} 
 			/>
 			<Route path="/checkout" element={<Checkout products={products} updateProduct={updateProduct} />} />
 		</Routes>
