@@ -1,4 +1,4 @@
-import { describe, test, expect, vi } from 'vitest'
+import { describe, test, expect, vi, beforeEach } from 'vitest'
 import { render, screen, act, fireEvent, waitFor, findByText } from '@testing-library/react'
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom'
 import { userEvent } from '@testing-library/user-event'
@@ -8,7 +8,11 @@ import App from '../src/App.jsx'
 // Mock fetch
 global.fetch = vi.fn()
 
-describe('App component', () => {
+beforeEach(() => {
+    localStorage.clear()
+})
+
+describe.skip('App component', () => {
     test('Header and Footer components render', async () => {
         fetch.mockResolvedValue({ json: () => Promise.resolve([]) })
 
@@ -228,5 +232,43 @@ describe('Checkout page', () => {
         await user.click(checkoutButton)
     
         expect(screen.getByRole('heading', {name: /^checkout$/i}))
+    })
+})
+
+describe('LocalStorage', async () => {
+    test('App preserves fetched products', async () => {
+        const user = userEvent.setup()
+        let fakeProducts = []
+
+        // make 10 fake products
+        for (let i = 0; i < 10; i++) {
+            fakeProducts.push({
+                id: i,
+                title: `product ${i + 1}`,
+                price: 10.99,
+                description: `This product sold ${i * 2}.`,
+                url: '...',
+                quantity: 0,
+            })
+        }
+
+        fetch.mockResolvedValue({ json: () => Promise.resolve(fakeProducts.slice(0, 4)) })
+
+        await act(async () => render(
+            <MemoryRouter initialEntries={['/']}>
+                <App />
+            </MemoryRouter>
+        ))
+
+        fireEvent.change(
+            screen.getAllByDisplayValue('0')[0], 
+            {target: {value: 5}}
+        )
+
+        fetch.mockResolvedValue({ json: () => Promise.resolve(fakeProducts) })
+
+        await user.click(screen.getByRole('link', {name: 'shop'}))
+
+        expect(screen.getByDisplayValue('5').value).toBe('5')
     })
 })

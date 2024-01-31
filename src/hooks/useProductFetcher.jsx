@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react' 
 
-function useProductFetcher(quantity = null) {
+function useProductFetcher(quantity = null, currentQuantity = null) {
     let [data, setData] = useState(null)
     let [loading, setLoading] = useState(true)
     let [error, setError] = useState(null)
@@ -31,7 +31,13 @@ function useProductFetcher(quantity = null) {
                 setError('Sorry, we\'re unable to display any products at the moment. Please refresh the page or try again later.')
             }
         }
-        fetchProducts(quantity)
+
+        if (currentQuantity < quantity) {
+            fetchProducts(quantity)
+        } else {
+            setData(false)
+            setLoading(false)
+        }
     }, [])
 
     return [data, loading, error]

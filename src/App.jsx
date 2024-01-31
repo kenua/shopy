@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
@@ -22,6 +22,18 @@ function App() {
 		})
 		setProducts(newProducts)
 	}
+
+	useEffect(() => {
+		let productsCache = JSON.parse(localStorage.getItem('products'))
+
+		if (productsCache) {
+			setProducts(productsCache)
+		}
+	}, [])
+
+	useEffect(() => {
+		localStorage.setItem('products', JSON.stringify(products))
+	}, [products])
 
 	return (
 	<>

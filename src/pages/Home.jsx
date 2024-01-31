@@ -3,11 +3,27 @@ import ProductItem from '../components/ProductItem'
 import useProductFetcher from '../hooks/useProductFetcher'
 
 function Home({ products, setProducts, updateProduct }) {
-    let [data, loading, error] = useProductFetcher(4)
+    let [data, loading, error] = useProductFetcher(4, products.length)
 
     useEffect(() => {
         if (data) {
-            setProducts(data)
+            if (products.length > 0) {
+                let productsToSave = []
+                
+                data.forEach(dataItem => {
+                    let addItem = true
+
+                    for (let i = 0; i < products.length; i++) {
+                        if (products[i].id === dataItem.id) addItem = false
+                    }
+
+                    if (addItem) productsToSave.push({...dataItem})
+                })
+
+                setProducts([...products, ...productsToSave])
+            } else {
+                setProducts(data)
+            }
         }
     }, [data])
 
