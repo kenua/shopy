@@ -215,7 +215,8 @@ describe('Checkout page', () => {
     
         render(<App />, { wrapper: Router })
     
-        const cartIcon = screen.getByRole('button', {name: 'cart'})
+        // const cartIcon = screen.getByRole('button', {name: 'cart'})
+        const cartIcon = screen.getByAltText(/Cart/)
     
         await user.click(cartIcon)
     
@@ -225,9 +226,13 @@ describe('Checkout page', () => {
     test('\'Checkout\' button renders checkout page', async () => {
         const user = userEvent.setup()
     
-        render(<App />, { wrapper: Router })
-    
-        const checkoutButton = screen.getByRole('button', {name: 'checkout'})
+        render(
+            <MemoryRouter initialEntries={['/']}>
+                <App />
+            </MemoryRouter>
+        )
+
+        const checkoutButton = screen.getByText(/Checkout/)
     
         await user.click(checkoutButton)
     
@@ -267,7 +272,7 @@ describe('LocalStorage', async () => {
 
         fetch.mockResolvedValue({ json: () => Promise.resolve(fakeProducts) })
 
-        await user.click(screen.getByRole('link', {name: 'shop'}))
+        await user.click(screen.getByText(/^shop$/))
 
         expect(screen.getByDisplayValue('5').value).toBe('5')
     })

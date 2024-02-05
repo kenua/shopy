@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar.jsx'
+
+import Navbar from './components/Navbar/index.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
 import Checkout from './pages/Checkout.jsx'
+
+import NormalizeStyle from '../normalize-styles.js'
+import ResetStyle from '../reset-styles.js'
 
 function App() {
 	let [products, setProducts] = useState([])
@@ -37,6 +41,9 @@ function App() {
 
 	return (
 	<>
+		<NormalizeStyle />
+		<ResetStyle />
+
     	<Navbar products={products} />
 
 		<Routes>
