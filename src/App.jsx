@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
 import Checkout from './pages/Checkout.jsx'
 
+import './fonts.css'
 import NormalizeStyle from '../normalize-styles.js'
 import ResetStyle from '../reset-styles.js'
 

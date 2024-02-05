@@ -10,6 +10,8 @@ const Wrapper = styled.header`
     position: relative;
 
     h1 {
+        font-size: 2.4rem;
+        font-weight: 600;
         text-transform: uppercase;
         position: relative;
         z-index: 2;
@@ -36,7 +38,7 @@ const Wrapper = styled.header`
     }
     a {
         font-size: 1.6rem;
-        font-weight: bold;
+        font-weight: 600;
     }
     .cart {
         position: relative;

@@ -10,6 +10,7 @@ const ResetStyle = createGlobalStyle`
         font-size: 62.5%;
     }
     body {
+        font-family: Nunito, sans-serif;
         color: #1E1E1E;
     }
     a {
