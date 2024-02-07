@@ -7,8 +7,10 @@ const ModuleStyle = createGlobalStyle`
         margin: 0 auto;
     }
 
-    @media screen and (min-width: 800px) {
-        padding: 0;
+    @media screen and (min-width: 1180px) {
+        .wrapper {
+            padding: 0;
+        }
     }
 `
 

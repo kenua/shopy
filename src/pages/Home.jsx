@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import ProductItem from '../components/ProductItem/index'
 import HomeHero from '../components/HomeHero/index'
+import NewProducts from '../components/NewProducts/index'
 import useProductFetcher from '../hooks/useProductFetcher'
 
 function Home({ products, setProducts, updateProduct }) {
@@ -49,7 +50,9 @@ function Home({ products, setProducts, updateProduct }) {
     return (
     <>
         <HomeHero />
-        { content }
+        <div className="wrapper">
+            <NewProducts productsList={content} />
+        </div>
     </>
     )
 }
