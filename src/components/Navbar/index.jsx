@@ -40,7 +40,7 @@ function Navbar({products}) {
                         {quantitySpan}
                         <img src={CartIcon} alt="Cart" />
                     </Link>
-                    <Button to="/checkout" $ghost={pathAtCheckout}>Checkout</Button>
+                    <Button to="/checkout" $ghost={pathAtCheckout} $arrow={!pathAtCheckout}>Checkout</Button>
                 </div>
             </div>
 

@@ -10,6 +10,10 @@ const buttonStyles = css`
     border-radius: 57px;
     display: inline-block;
 
+    svg {
+        margin-left: 16px;
+    }
+
 `
 
 export default buttonStyles

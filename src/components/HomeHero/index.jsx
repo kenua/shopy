@@ -15,7 +15,7 @@ function HomeHero() {
                     <h2 className="subheading">to your heart’s content</h2>
                     <p className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi est sit amet facilisis magna etiam tempor.</p>
                     <div className="">
-                        <Button to="/shop">Explore</Button>
+                        <Button to="/shop" $arrow>Explore</Button>
                     </div>
                 </div>
                 <div className="right-column">
