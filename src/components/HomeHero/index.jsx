@@ -5,6 +5,7 @@ import shopWoman1S from '/images/shop-woman1-s.png'
 import shopWoman1M from '/images/shop-woman1-m.png'
 import shopWoman1L from '/images/shop-woman1-l.png'
 import figure1 from '/images/figure1.svg'
+import squaresFigure from '/images/squaresFigure.svg'
 
 function HomeHero() {
     return (
@@ -27,7 +28,9 @@ function HomeHero() {
                     />
                 </div>
                 <img src={figure1} alt="" className="figure-1" />
+                <div className="figure-2"></div>
             </div>
+            <img src={squaresFigure} alt="" className="squaresFigure" />
         </Wrapper>
     )
 }

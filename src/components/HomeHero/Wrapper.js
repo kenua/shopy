@@ -6,6 +6,7 @@ const Wrapper = styled.section`
     overflow: hidden;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
+    position: relative;
 
     .wrapper {
         display: grid;
@@ -24,10 +25,31 @@ const Wrapper = styled.section`
         right: -120px;
         z-index: 2;
     }
+    .figure-2 {
+        display: none;
+    }
+    .squaresFigure {
+        display: none;
+    }
     .heading {
         font-weight: 900;
         font-size: 4rem;
         margin-bottom: 4px;
+        position: relative;
+
+        &::before {
+            content: "";
+            background-color: rgba(123, 202, 197, 0.4);
+            width: 67px;
+            height: 67px;
+            display: block;
+            border-radius: 20px;
+            transform: rotate(25deg);
+            position: absolute;
+            top: -5px;
+            left: -10px;
+            z-index: -1;
+        }
     }
     .subheading {
         font-weight: 500;
@@ -69,6 +91,23 @@ const Wrapper = styled.section`
         .figure-1 {
             width: 635px;
         }
+        .figure-2 {
+            background-color: rgba(123, 202, 197, 0.4);
+            width: 635px;
+            height: 635px;
+            border-radius: 99px;
+            display: block;
+            position: absolute;
+            bottom: -105%;
+            left: -150px;
+            transform: rotate(56deg);
+        }
+        .squaresFigure {
+            display: block;
+            position: absolute;
+            top: 48px;
+            left: 50%;
+        }
         .heading {
             font-size: 6rem;
             margin-top: 80px;
@@ -86,10 +125,10 @@ const Wrapper = styled.section`
         .figure-1 {
             width: 830px;
             bottom: -285px;
-            right: -110px;
+            right: -170px;
         }
         .shop-woman {
-            margin: 0 0px 0 0;
+            margin: 58px 0px 0 -58px;
         }
     }
 `
