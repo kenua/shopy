@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import ProductItem from '../components/ProductItem'
+import ProductItem from '../components/ProductItem/index.jsx'
 import useProductFetcher from '../hooks/useProductFetcher.jsx'
 
 function Shop({ products, setProducts, updateProduct }) {

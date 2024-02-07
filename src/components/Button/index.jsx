@@ -9,14 +9,14 @@ function Button(props) {
 
     if (props.type) {
         button = (
-            <StyledButton type={props.type} $ghost={props.$ghost}>
+            <StyledButton type={props.type} $ghost={props.$ghost} $expand={props.$expand} onClick={props.onClick}>
                 {props.children}
                 {arrowIcon}
             </StyledButton>
         )
     } else {
         button = (
-            <StyledLink to={props.to} $ghost={props.$ghost}>
+            <StyledLink to={props.to} $ghost={props.$ghost} $expand={props.$expand} onClick={props.onClick}>
                 {props.children}
                 {arrowIcon}
             </StyledLink>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import ProductItem from '../components/ProductItem'
+import ProductItem from '../components/ProductItem/index'
 import HomeHero from '../components/HomeHero/index'
 import useProductFetcher from '../hooks/useProductFetcher'
 
@@ -38,7 +38,11 @@ function Home({ products, setProducts, updateProduct }) {
         content = products
             .slice(0, 4)
             .map(productObj => (
-                <ProductItem key={productObj.id} product={productObj} updateProduct={updateProduct}/>
+                <ProductItem 
+                    key={productObj.id} 
+                    product={productObj} 
+                    updateProduct={updateProduct}
+                />
         ))
     }
 

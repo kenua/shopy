@@ -1,4 +1,4 @@
-import ProductItem from '../components/ProductItem.jsx'
+import ProductItem from '../components/ProductItem/index'
 
 function Checkout({ products, updateProduct }) {
     let productsList = products
