@@ -65,9 +65,11 @@ describe('Home component', () => {
 
         await act(async () => render(<App />, { wrapper: Router }))
         
-        const homeHeading = screen.getByRole('heading', {name: /shop to your heart's content/i})
+        const heading = screen.getByRole('heading', {name: /^shop$/i})
+        const subheading = screen.getByRole('heading', {name: /to your heart’s content/i})
     
-        expect(homeHeading).toBeInTheDocument()
+        expect(heading).toBeInTheDocument()
+        expect(subheading).toBeInTheDocument()
         expect(screen.getAllByRole('article').length).toBe(4)
         expect(screen.getByRole('heading', {name: 'product 1'})).toBeInTheDocument()
         expect(screen.getAllByText('$10.99')[0]).toBeInTheDocument()

@@ -10,6 +10,7 @@ import Checkout from './pages/Checkout.jsx'
 import './fonts.css'
 import NormalizeStyle from '../normalize-styles.js'
 import ResetStyle from '../reset-styles.js'
+import ModuleStyle from '../modules-styles.js'
 
 function App() {
 	let [products, setProducts] = useState([])
@@ -44,6 +45,7 @@ function App() {
 	<>
 		<NormalizeStyle />
 		<ResetStyle />
+		<ModuleStyle />
 
     	<Navbar products={products} />
 

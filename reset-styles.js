@@ -13,6 +13,14 @@ const ResetStyle = createGlobalStyle`
         font-family: Nunito, sans-serif;
         color: #1E1E1E;
     }
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+    }
+    p {
+        line-height: 24px;
+        font-size: 1.6rem;
+        margin: 0;
+    }
     a {
         text-transform: capitalize;
         color: inherit;

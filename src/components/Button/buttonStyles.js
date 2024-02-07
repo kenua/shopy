@@ -8,6 +8,7 @@ const buttonStyles = css`
     font-weight: 600;
     padding: 14px 28px;
     border-radius: 57px;
+    display: inline-block;
 
 `
 

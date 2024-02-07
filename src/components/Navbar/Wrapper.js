@@ -3,16 +3,19 @@ import styled from 'styled-components'
 const Wrapper = styled.header`
     background-color: ${props => (props.$pathAtRoot) ? '#FFE7BA' : 'transparent'};
     height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
     position: relative;
 
+    .wrapper {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     h1 {
         font-size: 2.4rem;
         font-weight: 600;
         text-transform: uppercase;
+        margin: 0;
         position: relative;
         z-index: 2;
 
@@ -60,8 +63,6 @@ const Wrapper = styled.header`
     }
 
     @media screen and (min-width: 800px) {
-        padding: 0 130px;
-
         .desktop-only {
             display: block;
         }

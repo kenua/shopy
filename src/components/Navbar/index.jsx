@@ -22,30 +22,32 @@ function Navbar({products}) {
 
     return (
     <Wrapper data-testid="navbar" $pathAtRoot={pathAtRoot}>
-        <div className="mobile-only"></div>
+        <div className="wrapper">
+            <div className="mobile-only"></div>
 
-        <h1>Shopy</h1>
+            <h1>Shopy</h1>
 
-        <div className="desktop-only">
-            <div className="navbar-item">
-                <Link to="/">home</Link>
-                <Link to="/shop">shop</Link>
+            <div className="desktop-only">
+                <div className="navbar-item">
+                    <Link to="/">home</Link>
+                    <Link to="/shop">shop</Link>
+                </div>
             </div>
-        </div>
 
-        <div className="desktop-only">
-            <div className="navbar-item">
-                <Link to="/checkout" className="cart">
-                    {quantitySpan}
-                    <img src={CartIcon} alt="Cart" />
-                </Link>
-                <Button to="/checkout" $ghost={pathAtCheckout}>Checkout</Button>
+            <div className="desktop-only">
+                <div className="navbar-item">
+                    <Link to="/checkout" className="cart">
+                        {quantitySpan}
+                        <img src={CartIcon} alt="Cart" />
+                    </Link>
+                    <Button to="/checkout" $ghost={pathAtCheckout}>Checkout</Button>
+                </div>
             </div>
-        </div>
 
-        <button type="button" className="mobile-only">
-            <img src={MenuIcon} alt="" />
-        </button>
+            <button type="button" className="mobile-only">
+                <img src={MenuIcon} alt="" />
+            </button>
+        </div>
     </Wrapper>
     )
 }
