@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/index.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
-import Checkout from './pages/Checkout.jsx'
+import Checkout from './pages/Checkout/index'
 
 import './fonts.css'
 import NormalizeStyle from '../normalize-styles.js'

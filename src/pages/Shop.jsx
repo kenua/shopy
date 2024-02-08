@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import styled from 'styled-components'
 import ProductItem from '../components/ProductItem/index.jsx'
 import useProductFetcher from '../hooks/useProductFetcher.jsx'
 
@@ -43,9 +44,21 @@ function Shop({ products, setProducts, updateProduct }) {
     <>
         <h1>Shop</h1>
         <p>Home &gt; shop</p>
-        { content }
+        <div className="wrapper">
+            <Grid>
+                { content }
+            </Grid>
+        </div>
     </>
     )
 }
+
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(284px, 284px));
+    justify-content: center;
+    column-gap: 14px;
+    row-gap: 14px;
+`
 
 export default Shop
