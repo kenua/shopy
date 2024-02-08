@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import styled from 'styled-components'
 import ProductItem from '../components/ProductItem/index.jsx'
 import useProductFetcher from '../hooks/useProductFetcher.jsx'
+import CurrentPage from '../components/CurrentPage'
 
 function Shop({ products, setProducts, updateProduct }) {
     let [data, loading, error] = useProductFetcher(20, products.length)
@@ -42,8 +43,7 @@ function Shop({ products, setProducts, updateProduct }) {
 
     return (
     <>
-        <h1>Shop</h1>
-        <p>Home &gt; shop</p>
+        <CurrentPage page="Shop" />
         <div className="wrapper">
             <Grid>
                 { content }

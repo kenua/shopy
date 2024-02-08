@@ -1,6 +1,7 @@
 import ProductItem from '../../components/ProductItem/index'
 import Button from '../../components/Button/index'
 import Wrapper from './Wrapper'
+import CurrentPage from '../../components/CurrentPage'
 
 function Checkout({ products, updateProduct }) {
     let productsList = products
@@ -18,8 +19,7 @@ function Checkout({ products, updateProduct }) {
 
     return (
     <Wrapper>
-        <h1>Checkout</h1>
-        <p>Home &gt; checkout</p>
+        <CurrentPage page="Checkout" />
         <div className="wrapper">
             <div className="grid">
                 <div className="subgrid">
