@@ -4,6 +4,8 @@ const Wrapper = styled.article`
     width: 284px;
     border-radius: 20px;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
     position: relative;
     box-shadow: 0 4px 28px rgba(0,0,0, 0.08);
 
@@ -49,6 +51,7 @@ const Wrapper = styled.article`
         grid-template-columns: 1fr 164px 1fr;
         border-radius: 30px;
         border: 1px solid #1E1E1E;
+        margin-top: auto;
         margin-bottom: 10px;
         overflow: hidden;
     }
