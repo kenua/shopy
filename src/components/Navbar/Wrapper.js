@@ -23,12 +23,12 @@ const Wrapper = styled.header`
             content: "";
             background-color: rgba(123, 202, 197, 0.4);
             display: block;
-            width: 635px;
-            height: 635px;
+            width: 405px;
+            height: 405px;
             border-radius: 99px;
             position: absolute;
-            top: -637px;
-            left: -403px;
+            top: -367px;
+            left: -223px;
             z-index: -1;
             transform: rotate(-65deg);
 
@@ -63,6 +63,9 @@ const Wrapper = styled.header`
     }
 
     @media screen and (min-width: 800px) {
+        h1 {
+            width: 220px;
+        }
         .desktop-only {
             display: block;
         }

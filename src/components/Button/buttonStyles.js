@@ -5,7 +5,7 @@ const buttonStyles = css`
     text-align: ${(props) => props.$expand ? 'center' : 'left'};
     font-size: 1.6rem;
     background-color: ${(props) => props.$ghost ? 'transparent' : '#7BCAC5'};
-    border: ${(props) => props.$ghost ? '1px solid #7BCAC5' : 'none'};
+    border: ${(props) => props.$ghost ? '1px solid #1E1E1E' : 'none'};
     font-weight: 600;
     padding: 14px 28px;
     border-radius: 57px;
