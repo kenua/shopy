@@ -2,7 +2,7 @@ import { describe, test, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import Checkout from '../src/pages/Checkout.jsx'
+import Checkout from '../src/pages/Checkout/index'
 
 describe('Cart has items', () => {
     let fakeProducts = []

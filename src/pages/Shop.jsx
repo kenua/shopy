@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import ProductItem from '../components/ProductItem/index.jsx'
-import useProductFetcher from '../hooks/useProductFetcher.jsx'
+import ProductItem from '../components/ProductItem/index'
+import useProductFetcher from '../hooks/useProductFetcher'
 import CurrentPage from '../components/CurrentPage'
 
 function Shop({ products, setProducts, updateProduct }) {

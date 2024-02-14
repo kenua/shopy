@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import Navbar from './components/Navbar/index.jsx'
-import Footer from './components/Footer.jsx'
-import Home from './pages/Home.jsx'
-import Shop from './pages/Shop.jsx'
+import Navbar from './components/Navbar/index'
+import Footer from './components/Footer'
+import Home from './pages/Home'
+import Shop from './pages/Shop'
 import Checkout from './pages/Checkout/index'
 
 import './fonts.css'

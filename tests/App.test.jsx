@@ -3,7 +3,7 @@ import { render, screen, act, fireEvent, waitFor, findByText } from '@testing-li
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom'
 import { userEvent } from '@testing-library/user-event'
 
-import App from '../src/App.jsx'
+import App from '../src/App'
 
 // Mock fetch
 global.fetch = vi.fn()

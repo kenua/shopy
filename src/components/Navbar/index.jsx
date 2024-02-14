@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import Wrapper from './Wrapper.js'
-import Button from '../Button/index.jsx'
+import Wrapper from './Wrapper'
+import Button from '../Button/index'
 
 import MenuIcon from '/menu.svg'
 import CartIcon from '/cart.svg'
