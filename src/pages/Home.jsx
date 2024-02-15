@@ -3,6 +3,7 @@ import ProductItem from '../components/ProductItem/index'
 import HomeHero from '../components/HomeHero/index'
 import NewProducts from '../components/NewProducts/index'
 import useProductFetcher from '../hooks/useProductFetcher'
+import SpecialSales from '../components/SpecialSales'
 
 function Home({ products, setProducts, updateProduct }) {
     let [data, loading, error] = useProductFetcher(4, products.length)
@@ -52,6 +53,7 @@ function Home({ products, setProducts, updateProduct }) {
         <HomeHero />
         <div className="wrapper">
             <NewProducts productsList={content} />
+            <SpecialSales />
         </div>
     </>
     )
